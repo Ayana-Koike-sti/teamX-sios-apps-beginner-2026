@@ -1,4 +1,3 @@
-aaa
 # teamX-sios-apps-beginner-2026
 SIOS Apps事業理解研修の手順確認用のrepository
 
