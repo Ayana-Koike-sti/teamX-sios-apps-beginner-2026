@@ -62,6 +62,58 @@ const order = () => {
     return price
 }
 
+// 支払い処理の関数
+// price: 商品の価格, paidAmount: 支払金額
+function payment(price, paidAmount) {
+  // 1. 支払金額のチェック
+  // 足りない場合はコンソールにメッセージを出力して終了
+  if (paidAmount < price) {
+    console.log(`代金${price}円に対して、支払金額が${price - paidAmount}円不足しています。`);
+    return;
+  } 
+
+  // おつりの計算
+  let change = paidAmount - price;
+  console.log(`代金: ${price}円 | 支払金額: ${paidAmount}円`);
+  console.log(`おつり: ${change}円`);
+  console.log("-------------------------");
+
+  if (change === 0) {
+    console.log("おつりはありません。");
+    return;
+  }
+
+  // 2. おつりで最少となる貨幣の枚数を計算
+  // 日本の硬貨・紙幣の金種を大きい順に定義（※2000円札は実用性を考慮し除外）
+  // denominationsは日本で使用されている貨幣のリスト
+  const denominations = [10000, 5000, 1000, 500, 100, 50, 10, 5, 1];
+  let totalCount = 0; // 貨幣の合計枚数
+
+  console.log("【おつりの内訳】");
+  
+  // 各貨幣の枚数を計算
+  for (const coin of denominations) {
+    // その金種が何枚必要か計算（小数点切り捨て）
+    const count = Math.floor(change / coin);
+    
+    if (count > 0) {
+      // 単位を見やすくする（1000円以上は「札」、それ未満は「玉」）
+      const unit = coin >= 1000 ? "札" : "玉";
+
+      // お釣りの内訳表示
+      console.log(`${coin}円${unit}: ${count}枚`);
+      
+      // 残りのおつり金額を更新（その金種で割った余り）
+      change %= coin;
+      totalCount += count;
+    }
+  }
+
+  //貨幣の合計枚数を表示
+  console.log("-------------------------");
+  console.log(`お渡しする貨幣の最少合計枚数: ${totalCount}枚\n`);
+}
+
 // メイン処理
 const main = () => {
     // ArrayListの代わりに標準の配列を使用します
