@@ -1,6 +1,6 @@
 # teamX-sios-apps-beginner-2026
 SIOS Apps事業理解研修の手順確認用のrepository
-
+aaa
 ## gitとは
 ソースコードの保管・管理をするためのツール。特に複数人で一つのプロジェクトを開発するには必須。
 
